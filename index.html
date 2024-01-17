@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Clean Coding és Unit tesztelés</title>
+    <style>
+        body {
+            background-color: rgb(46, 46, 46);
+        }
+
+        .embed-responsive .embed-responsive-item,
+        .embed-responsive iframe,
+        .embed-responsive embed,
+        .embed-responsive object,
+        .embed-responsive video {
+            height: 800px;
+            width: 80%;
+        }
+
+        .carousel {
+            height: 600px;
+        }
+
+        .carousel-item {
+            align-self: flex-end;
+        }
+
+        #info {
+            color: rgb(179, 207, 248);
+        }
+        
+        a, li {
+            font-size: 18px;
+        }
+
+        .right {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="#video">Videó</a>
+                <a class="nav-item nav-link" href="#info">Clean Coding és Unit</a>
+                <a class="nav-item nav-link" href="#gh">Github</a>
+                <a class="nav-item nav-link" href="#uc">Unit teszt ChatGPT segítségével</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="embed-responsive embed-responsive-4by3 justify-content-center d-flex" id="video">
+            <iframe id="videoPlayer" class="embed-responsive-item" src="https://www.youtube.com/embed/yRy_zPz5WcA?enablejsapi=1" allowfullscreen></iframe>
+        </div>
+        <h1 style="color: rgb(179, 207, 248);" class="justify-content-center d-flex">Videóban található részletek</h1>
+        <ul>
+            <li style="color: rgb(179, 207, 248);" class="justify-content-center d-flex">Híres szoftver bugok: <a href="javascript:void(0);" onclick="jumpToTime(1, 55)">1:55</a></li>
+        </ul>
+        <div id="carouselExampleCaptions" class="carousel slide align-items-end">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="img/ariane.jpg" class="d-block w-100" alt="Ariane 5" style="max-height: 500px; max-width: 500px; max-height: 500px; width: auto; height: auto; object-fit: cover; margin-left: 36.5%;">
+                <div class="carousel-caption d-none d-md-block text-light-emphasis bg-dark">
+                    <h5>Ariane 5</h5>
+                    <p>Felrobbant felszállás után 37 másodpercel egy overflow error miatt!</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="img/therac.jpg" class="d-block w-100" alt="Therac-25" style="max-width: 500px; max-height: 500px; width: auto; height: auto; object-fit: cover; margin-left: 36.5%; margin-top: 130px;">
+                <div class="carousel-caption d-none d-md-block text-light-emphasis bg-dark">
+                    <h5>Therac-25</h5>
+                    <p>Konkurens futási hibák történtek az engedélyetett dózis akár 100x osát is kibocsájtotta.</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="img/f22.jpg" class="d-block w-100" alt="F22" style="max-width: 500px; max-height: 500px; width: auto; height: auto; object-fit: cover; margin-left: 36.5%; margin-top: 65px;">
+                <div class="carousel-caption d-none d-md-block text-light-emphasis bg-dark">
+                    <h5>Elvétett rakéták, F22 Raptor, Marsa landoló autómatizált egység</h5>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="img/knight.png" class="d-block w-100" alt="Knight Capital" style="max-width: 500px; max-height: 500px; width: auto; height: auto; object-fit: cover; margin-left: 36.5%; margin-top: 220px;">
+                <div class="carousel-caption d-none d-md-block text-light-emphasis bg-dark">
+                    <h5>Knight Capital</h5>
+                    <p>440 millió dollárt vesztettek 45 perc alatt egy aritmetikai hiba miatt.</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="img/peacemaker.png" class="d-block w-100" alt="Szívritmus-szabályozó (peacemaker)" style="max-width: 500px; max-height: 500px; width: auto; height: auto; object-fit: cover; margin-left: 36.5%; margin-top: 130px;">
+                <div class="carousel-caption d-none d-md-block text-light-emphasis bg-dark">
+                    <h5>Szívritmus-szabályozó (peacemaker)</h5>
+                    <p>Rossz indulatú hackerek hozzá tudtak férni.</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="img/sony.png" class="d-block w-100" alt="Sony" style="max-width: 500px; max-height: 500px; width: auto; height: auto; object-fit: cover; margin-left: 36.5%; ">
+                <div class="carousel-caption d-none d-md-block text-light-emphasis bg-dark">
+                    <h5>Sony</h5>
+                    <p>Rootkit et telepített a Windows rendszerekre ezáltal távolról elérhetők lettek a gépek.</p>
+                </div>
+              </div>
+            </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Elöző</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Következő</span>
+                </button>
+            </div>
+        </div>
+        <div id="info" class="justify-content-center d-flex">
+            <ul>
+                <li>Szoftver méretek: <a href="javascript:void(0);" onclick="jumpToTime(9, 17)">9:17</a></li>
+                    -Apollo 11: 145 ezer sorű
+                    <br>
+                    -Microsoft Windows XP: 10+ millió sor
+                    <br>
+                    -Linux: 25-30+ millió sor
+                    <br>
+                    -Modern kocsik: 100-150+ millió sor
+                    <br>
+                    -Uber: 10+ millió sor
+                <li>Clean code (Tiszta kód): <a href="javascript:void(0);" onclick="jumpToTime(12, 3)">12:03</a></li>
+                    C.Martin (Uncle Bob) összegyüjtötte nagyábból az összes gyakorlatot és írt egy könyvet.
+                    <br>
+                    -Olvasható legyen, Moduláris, Minél rövidebb és egy dologra feleljen egy, Commenteljünk a kódba és frissítésnél azt <br> is írjuk át, Legyen minden szempontból konzisztens, Tesztelés, Elnevezések.
+                    <br>
+                    -Minden csak egy dolgot csináljon.
+                    <br>
+                    Miért fontos?
+                    <br>
+                    -A felhasználók szeretik a fejlesztéseket így őket is fogja érdekelni hogy milyen gyakran jönnek frissítések és hogy<br> ne legyenek bug ok, ahhoz pedig hogy gyorsabban tudjunk dolgozni fontos hogy olvasható legyen <br>a kód bármikor elolvassuk.
+                <li>Unit (Tesztelés): <a href="javascript:void(0);" onclick="jumpToTime(27, 32)">27:32</a></li>
+                    Unit testing (Autómata tesztelés)
+                    Lényeges rész:<a href="javascript:void(0);" onclick="jumpToTime(28, 5)">28:05</a>-től <a href="javascript:void(0);" onclick="jumpToTime(33, 0)">33:00</a>-ig
+                <li>Kódolás/Statisztika: <a href="javascript:void(0);" onclick="jumpToTime(33, 10)">33:10</a></li>
+                <li>Kurzus információk / Kérdések: <a href="javascript:void(0);" onclick="jumpToTime(49, 45)">49:45</a></li>
+            </ul>
+        </div>
+        <div id="uc" class="container bg-dark">
+            <h2 style="color: rgb(179, 207, 248);" class="justify-content-center d-flex">Unit teszt példa ChatGPT segitségével:</h2>
+            <div class="container bg-gradient">
+                <h4 class="text-light justify-content-center d-flex">// sum.js</h4>
+                <p class="text-light justify-content-center d-flex">function add(a, b) {<br>return a + b; <br>} <br>module.exports = add;</p>
+            </div>
+            <p style="color: rgb(179, 207, 248); font-size: 18px;" class="justify-content-center d-flex">Most készítsünk egy egyszerű Jest tesztet ennek a függvénynek:</p>
+            <div class="container bg-gradient">
+                <h4 class="text-light justify-content-center d-flex">// sum.test.js</h4>
+                <p class="text-light justify-content-center d-flex">const add = require('./sum');<br>test('adds 1 + 2 to equal 3', () => {<br>expect(add(1, 2)).toBe(3)<br>});<br>test('adds 5 + 7 to equal 12', () => {<br>expect(add(5, 7)).toBe(12);<br>});</p>
+            </div>
+            <p style="color: rgb(179, 207, 248); font-size: 18px;" class="justify-content-center d-flex">
+                Ebben a példában a 'sum.test.js' fájlban két egyszerű tesztesetet hoztunk létre a <br>
+                'add' függvényhez. Az első teszteset ellenőrzi, hogy az 'add(1, 2)' hívás eredménye <br>
+                megegyezik-e a várt értékkel (3), míg a második teszteset az 'add(5, 7)' hívás <br>
+                eredményét ellenőrzi a várt értékkel (12). 
+            </p>
+            <p style="color: rgb(179, 207, 248); font-size: 18px;" class="justify-content-center d-flex">
+                A 'test' függvények a Jest keretrendszer részei, és az 'expect' függvény <br>
+                segítségével definiálják a várt eredményt. Ha a függvény valóban megfelel a  <br>
+                várakozásoknak, akkor a teszt sikeres lesz, különben hibát jelez
+            </p>
+            <p style="color: rgb(179, 207, 248); font-size: 18px;" class="justify-content-center d-flex">
+                Ez csak egy egyszerű példa, de a valóságban a unit tesztek általában sokkal <br>
+                összetettebbek és több különböző esetet fednek le. A unit tesztek segítenek abban, <br>
+                hogy a kódunk stabil legyen, és könnyebben karbantartható legyen.
+            </p>
+        </div>
+        <button id="gh" type="button" class="btn btn-secondary ml-auto right" data-bs-toggle="modal" data-bs-target="#githubInfoModal">Pár Github információ!</button>
+        <div class="modal fade" id="githubInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">GitHub Információk</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Első és legfontosabb lépés hogy csináljunk egy profilt.</p>
+                        <p>Miután regisztráltunk és sikeresen beléptünk egyből kitudjuk választani hogy mi legyen a mappa neve és hogy publikus legyen vagy sem.</p>
+                        <p>Majd a következő "uploading an existing file" text re kattintva tudunk filokat feltölteni. (Csak file)</p>
+                        <p>Mappa létrehozása esetén pedig "Add file" "Create new file" és fent írjuk be a mappa nevét a következő helyre "Name your file..." és nyomjunk egy /-t</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezárás</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        function jumpToTime(minutes, seconds) {
+            var videoPlayer = document.getElementById('videoPlayer');
+            if (videoPlayer && videoPlayer.contentWindow) {
+                var newTime = minutes * 60 + seconds;
+                videoPlayer.contentWindow.postMessage('{"event":"command","func":"seekTo","args":[' + newTime + ',"true"]}', '*');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                console.error('videoPlayer or videoPlayer.contentWindow is undefined');
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
